@@ -35,6 +35,11 @@ public class BookController {
         return this.bookService.getBookById(id);
     }
 
+    @GetMapping("/listAllBooks")
+    public ResponseEntity<?> listAllBooks() {
+        return this.bookService.listAllBooks();
+    }
+
     @DeleteMapping("{id}")
     public ResponseEntity<?> deleteBookById(@PathVariable long id) {
         return this.bookService.deleteById(id);

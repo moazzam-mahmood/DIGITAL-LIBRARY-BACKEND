@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -53,6 +54,15 @@ public class BookRepository {
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();
+    }
+
+    public ResponseEntity<?> findAllBooks(){
+       List<BookOutputEntity> outputEntityList = this.bookJPARepository.findAll();
+       outputEntityList.forEach(this.bookOutputMapper::mapToModel);
+       if(!outputEntityList.isEmpty()) {
+           return new ResponseEntity<>(outputEntityList, HttpStatus.OK);
+       }
+       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     public ResponseEntity<BookModel> updateById(long id, BookModel bookModel) {

@@ -30,4 +30,8 @@ public class BookService {
     public ResponseEntity<?> updateBook(long id, BookModel bookModel) {
         return this.bookRepository.updateById(id,bookModel);
     }
+
+    public ResponseEntity<?> listAllBooks() {
+        return this.bookRepository.findAllBooks();
+    }
 }
